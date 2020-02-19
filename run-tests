@@ -21,11 +21,7 @@ myspawn('npm run lint')
     return exec('rm -rf ./.coverage');
   })
   .then(() => myspawn('babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --reporter dot'))
-  .then(() => {
-    if (isCI) {
-      return exec(`cat ./.coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js`);
-    }
-  })
+
   .catch(err => {
     if (err.stack) {
         console.error(err.stack);
